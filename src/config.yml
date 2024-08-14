@@ -1,7 +1,0 @@
-wopr_postgres:
-  schema: airflow
-  host: localhost
-  port: 5432
-  dbname: psql
-  user: username
-  password: "secret"

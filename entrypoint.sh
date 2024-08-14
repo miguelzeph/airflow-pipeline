@@ -1,14 +1,25 @@
 #!/bin/bash
 
-export AIRFLOW_HOME=$(pwd)/src/airflow
+echo "****** Setting Up Environment Variables for Airflow *******"
+# Enable automatic export of all variables defined after this point
+set -a
+# Load environment variables from .env file
+source .env
+# Disable automatic export of variables
+set +a
 
-echo "****** Starting DB*******"
+echo "AIRFLOW_HOME=${AIRFLOW_HOME}"
+echo "AIRFLOW_UID=${AIRFLOW_UID}"
+echo "AIRFLOW__CORE__LOAD_EXAMPLE=${AIRFLOW__CORE__LOAD_EXAMPLES}"
+echo "AIRFLOW__WEBSERVER__HOST=${AIRFLOW__WEBSERVER__HOST}"
+echo "AIRFLOW__WEBSERVER__PORT=${AIRFLOW__WEBSERVER__PORT}"
+
+echo "****** Starting DB *******"
 airflow db init
 
 sleep 5
 
-echo "****** Creating User Admin*******"
-
+echo "****** Creating User Admin *******"
 airflow users create \
     --role Admin \
     --firstname admin \
@@ -19,13 +30,6 @@ airflow users create \
 
 sleep 5
 
-# Starting Airflow (standalone is only for production!)
-echo "****** Starting Airflow*******"
-
-# airflow standalone
-
+echo "****** Starting Airflow *******"
 airflow webserver -p 8080 &
-
-sleep 5
-
 airflow scheduler
