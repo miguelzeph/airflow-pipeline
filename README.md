@@ -79,11 +79,12 @@ airflow standalone
 ```
 
 ## Modifying Environment Variables (airflow.cfg)
-When you need to modify settings within the `airflow.cfg` file, you can do it directly on the file when you want to run it locally or do some test.
+When you need to modify settings within the `airflow.cfg` file, you can do it directly on the file when you want to run it locally or do some test. I strongly recommend insert the variables in the file **.env** instead chage the airflow.cfg directly because the configuration won't be overwrited if you need to reset the airflow for some reason.
+
 ```bash
 project
 │
-├── env
+├── .env
 │
 └── airflow
     │
@@ -114,10 +115,17 @@ Other example:
 AIRFLOW__WEBSERVER__APP_THEME = "yeti.css"
 ```
 
-### Environment Variable for this project
-If you don't want to care with the environment variable, we provided a .env file for this project:
+## Core Project Structure
+To test Airflow, you only need to focus on the Python files inside the dags folder.
 ```bash
-source .env
+.
+├── airflow
+│   ├── dags           # Directory to save your DAGs and Python code
+│   │   └── dag_example_1.py  # Example DAG file
+├── entrypoint.sh      # Script to automate the setup process for Airflow
+├── .env               # Configuration file for environment variables
+└── requirements.txt   # File listing Python libraries
+
 ```
 
 ## Authors
