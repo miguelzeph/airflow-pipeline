@@ -23,6 +23,16 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
+## Airfloe Main Components
+
+- **DAGs:** Define the workflow and the sequence of tasks.
+- **Tasks:** The units of work within a DAG.
+- **Operators:** Define the logic of tasks. Examples include PythonOperator, BashOperator, and DummyOperator.
+- **Scheduler:** Plans and executes tasks based on the DAG definitions.
+- **Web Interface:** A graphical interface for monitoring and managing DAGs and tasks.
+- **Executor:** Defines how tasks will be executed (e.g., LocalExecutor, CeleryExecutor, KubernetesExecutor).
+
+
 ## Configuring Airflow Locally (Optional)
 **Note**: Before start If you're a Linux user, you can skip this entire section by simply executing the `entrypoint.sh` file, which will run all of these commands at once. However, for educational purposes, you can follow the instructions below to execute the program step by step.
 
