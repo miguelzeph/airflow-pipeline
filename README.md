@@ -128,6 +128,51 @@ To test Airflow, you only need to focus on the Python files inside the dags fold
 
 ```
 
+## DAGs
+
+### What is a DAG?
+A **DAG (Directed Acyclic Graph)** is a fundamental concept in Apache Airflow that represents a series of tasks organized in a way that reflects their dependencies. The "Directed" part indicates that the workflow has a defined order, where one task leads to the next. "Acyclic" ensures that the workflow does not loop back on itself, preventing any circular dependencies.
+
+In simpler terms, a DAG is a collection of all the tasks you want to run, organized in a way that clearly shows their relationships and order of execution.
+
+### Example DAGs Ordered by Level of Complexity
+
+Below is a list of example DAGs, ordered from the most basic to more advanced workflows. These examples cover a range of common data engineering tasks:
+
+1. **Data Ingestion**  
+   Ingesting data from various sources such as APIs, databases, or files into a data lake or data warehouse.
+
+2. **ETL/ELT Pipelines**  
+   Extracting, Transforming, and Loading (ETL) data, or Extracting, Loading, and Transforming (ELT) data into a target system, typically for further analysis.
+
+3. **Updating Dimension and Fact Tables**  
+   Maintaining and updating tables in a data warehouse, including both dimension tables (containing master data) and fact tables (containing transactional data).
+
+4. **Data Quality Checks**  
+   Verifying the accuracy, completeness, and reliability of data after it has been ingested or transformed.
+
+5. **Data Aggregation and Summary Pipelines**  
+   Aggregating large datasets into summaries or key metrics that can be used for reporting or analysis.
+
+6. **Machine Learning Pipelines**  
+   Orchestrating the end-to-end process of training, validating, and deploying machine learning models.
+
+7. **Streaming Pipelines**  
+   Processing and analyzing data in real-time or near real-time, often integrating with tools like Apache Kafka or Spark.
+
+8. **Reports and Dashboards**  
+   Automating the generation of reports and updating dashboards with the latest data.
+
+9. **Monitoring and Alerts**  
+   Continuously monitoring data pipelines and system health, with automated alerts triggered by specific conditions or failures.
+
+10. **Data Archival and Deletion**  
+    Managing the lifecycle of data by archiving or deleting old or obsolete data, ensuring compliance with data retention policies.
+
+11. **Continuous Integration Pipelines (CI/CD)**  
+    Automating the testing and deployment of data pipeline code, ensuring that new updates can be rolled out smoothly and efficiently.
+
+
 ## Authors
 
 - Miguel Angelo do Amaral Junior: Data Engineer
