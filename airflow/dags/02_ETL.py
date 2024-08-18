@@ -2,8 +2,8 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
 from python_functions.data_extraction import extract_data
-from python_functions.data_transform import validate_data
-from python_functions.data_load import save_database
+from python_functions.data_transform import transform_etl
+from python_functions.data_load import load_data
 
 # Define the DAG
 default_args = {
@@ -15,13 +15,13 @@ default_args = {
 }
 
 with DAG(
-    dag_id='01_data_ingestion',
+    dag_id='02_ETL',
     default_args=default_args,
-    description='DAG to extract, validate, and save data from an API',
+    description='DAG - Pipeline ETL',
     schedule_interval='@daily',
     start_date=days_ago(1),
     catchup=False,
-    tags=['data-ingestion', 'validation', 'save'],
+    tags=['data-ingestion', 'etl'],
 ) as dag:
 
     # Task to extract data from the API
@@ -31,9 +31,9 @@ with DAG(
     )
 
     # Task to validate the extracted data
-    validate_task = PythonOperator(
-        task_id='validate_data',
-        python_callable=validate_data,
+    transform_task = PythonOperator(
+        task_id='transform_data',
+        python_callable=transform_etl,
         op_kwargs={ # Passing parameters to python function
             'task_ids': 'extract_data'
         },
@@ -41,14 +41,14 @@ with DAG(
     )
 
     # Task to save the validated data
-    save_task = PythonOperator(
-        task_id='save_database',
+    load_task = PythonOperator(
+        task_id='load_data',
         op_kwargs={ # Passing parameters to python function
-            'task_ids': 'validate_data'
+            'task_ids': 'transform_data'
         },
-        python_callable=save_database,
+        python_callable=load_data,
         provide_context=True,
     )
 
     # Define the order of tasks in the DAG
-    extract_task >> validate_task >> save_task
+    extract_task >> transform_task >> load_task

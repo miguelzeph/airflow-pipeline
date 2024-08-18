@@ -23,7 +23,7 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
-## Airfloe Main Components
+## Airflow Main Components
 
 - **DAGs:** Define the workflow and the sequence of tasks.
 - **Tasks:** The units of work within a DAG.
@@ -152,8 +152,12 @@ Below is a list of example DAGs, ordered from the most basic to more advanced wo
 1. **Data Ingestion**  
    Ingesting data from various sources such as APIs, databases, or files into a data lake or data warehouse.
 
+   file: **01_data_ingestion.py**
+
 2. **ETL/ELT Pipelines**  
    Extracting, Transforming, and Loading (ETL) data, or Extracting, Loading, and Transforming (ELT) data into a target system, typically for further analysis.
+
+   file: **02_ETL.py**
 
 3. **Updating Dimension and Fact Tables**  
    Maintaining and updating tables in a data warehouse, including both dimension tables (containing master data) and fact tables (containing transactional data).
